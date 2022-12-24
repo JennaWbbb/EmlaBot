@@ -2,14 +2,11 @@
 
 namespace EmlaBot.Models
 {
-    public class ChastitySession
+    public class ChastitySessionDetails : ChastitySession
     {
-        public string ChastitySessionId { get; set; }
         public string CreatorId { get; set; }
-        public string WearerId { get; set; }
         public string HolderId { get; set; }
         public bool InoneoercentRange { get; set; }
-        public int Status { get; set; }
         public int SessionType { get; set; }
         public int Interval { get; set; }
         public string Keyword { get; set; }
@@ -18,7 +15,6 @@ namespace EmlaBot.Models
         public int Feed { get; set; }
         public int FriendLink { get; set; }
         public int ReqLink { get; set; }
-        public int Offer { get; set; }
         public int MinimumHolderScore { get; set; }
         public int HolderGender { get; set; }
         public int Transfer { get; set; }
@@ -30,10 +26,6 @@ namespace EmlaBot.Models
         public int ReqLinkAdd { get; set; }
         public int ReqLinkSub { get; set; }
         public DurationType DurationType { get; set; }
-        public int RandomDuration { get; set; }
-        public int StartDuration { get; set; }
-        public int MinDuration { get; set; }
-        public int MaxDuration { get; set; }
         public int BeatBy { get; set; }
         public int SpecStartDuration { get; set; }
         public int SpecMinDuration { get; set; }
@@ -58,7 +50,6 @@ namespace EmlaBot.Models
         public int CleaningAction { get; set; }
         public int CleaningPenalty { get; set; }
         public int PenaltyGamesMinimum { get; set; }
-        public int StartDate { get; set; }
         public int EndDate { get; set; }
         public bool CanBeClosed { get; set; }
         public int PlayedGamesMust { get; set; }
@@ -68,11 +59,7 @@ namespace EmlaBot.Models
         public int Cleanings { get; set; }
         public int LastWeightUpdate { get; set; }
         public int PlayedGames { get; set; }
-        public int Duration { get; set; }
         public int PictureBy { get; set; }
-        public int TimeInLock { get; set; }
-        public int Created { get; set; }
-        public int CloseDate { get; set; }
         public int InCleaning { get; set; }
         public int CleaningStarted { get; set; }
         public int ApplyRiskVoting { get; set; }

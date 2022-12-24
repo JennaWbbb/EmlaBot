@@ -2,7 +2,7 @@
 
 namespace EmlaBot.Models
 {
-    public class User : Account
+    public class User : Account, IApiToken
     {
         public int LastClick { get; set; }
         public int SubscriptioVvalue { get; set; }

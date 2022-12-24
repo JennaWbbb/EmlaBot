@@ -4,6 +4,6 @@
     {
         public User User { get; set; }
 
-        public ChastitySession ChastitySession { get; set; }
+        public ChastitySessionDetails ChastitySession { get; set; }
     }
 }

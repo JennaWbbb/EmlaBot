@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EmlaBot.Models
+﻿namespace EmlaBot.Models
 {
-    internal interface IApiToken
+    public interface IApiToken
     {
+        string UserId { get; set; }
+
+        string ApiKey { get; set; }
     }
 }

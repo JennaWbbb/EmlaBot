@@ -19,7 +19,7 @@ namespace EmlaBot.Services
 
         Task<InfoResponse> AddRandomTime(IApiToken wearer, TimeSpan lowerBound, TimeSpan upperBound);
 
-        Task<InfoResponse> AddRequirementLinks(IApiToken wearer, int duration);
+        Task<InfoResponse> AddRequirementLinks(IApiToken wearer, int quantity);
 
         Task<InfoResponse> AddTime(IApiToken wearer, TimeSpan duration, string message);
 
@@ -39,7 +39,7 @@ namespace EmlaBot.Services
 
         Task<InfoResponse> SubtractRandomTime(IApiToken wearer, IApiToken holder, TimeSpan lowerBound, TimeSpan upperBound);
 
-        Task<InfoResponse> SubtractRequirementLinks(IApiToken wearer, IApiToken holder, int duration);
+        Task<InfoResponse> SubtractRequirementLinks(IApiToken wearer, IApiToken holder, int quantity);
 
         Task<InfoResponse> SubtractTime(IApiToken wearer, IApiToken holder, TimeSpan duration, string message);
     }

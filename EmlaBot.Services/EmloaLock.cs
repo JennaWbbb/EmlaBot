@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Runtime.Serialization;
 using System.Threading.Tasks;
 
 namespace EmlaBot.Services
@@ -25,6 +26,12 @@ namespace EmlaBot.Services
         /// </summary>
         /// <param name="user">The user.</param>
         /// <returns></returns>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown if no <paramref name="wearer" /> is provided
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Thrown if the <paramref name="wearer" /> is missing its user id or API key
+        /// </exception>
         public Task<InfoResponse> GetInfo(IApiToken user)
         {
             return user == null
@@ -69,6 +76,12 @@ namespace EmlaBot.Services
         /// Must be called with the holder's key. Naive attempts of reducing your own time will be
         /// penalised 😘
         /// </remarks>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown if no <paramref name="wearer" /> is provided
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Thrown if the <paramref name="wearer" /> is missing its user id or API key
+        /// </exception>
         public Task<InfoResponse> SubtractTime(IApiToken wearer, IApiToken holder, TimeSpan duration, string message)
         {
             if (wearer == null)
@@ -100,6 +113,12 @@ namespace EmlaBot.Services
         /// <param name="lowerBound">The minimum duration to add.</param>
         /// <param name="upperBound">The maximum duration to add.</param>
         /// <returns></returns>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown if no <paramref name="wearer" /> is provided
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Thrown if the <paramref name="wearer" /> is missing its user id or API key
+        /// </exception>
         public Task<InfoResponse> AddRandomTime(IApiToken wearer, TimeSpan lowerBound, TimeSpan upperBound)
         {
             if (wearer == null)
@@ -135,6 +154,12 @@ namespace EmlaBot.Services
         /// Must be called with the holder's key. Naive attempts of reducing your own time will be
         /// penalised 😘
         /// </remarks>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown if no <paramref name="wearer" /> is provided
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Thrown if the <paramref name="wearer" /> is missing its user id or API key
+        /// </exception>
         public Task<InfoResponse> SubtractRandomTime(IApiToken wearer, IApiToken holder, TimeSpan lowerBound, TimeSpan upperBound)
         {
             if (wearer == null)
@@ -169,6 +194,12 @@ namespace EmlaBot.Services
         /// <param name="wearer">The wearer.</param>
         /// <param name="duration">The duration.</param>
         /// <returns></returns>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown if no <paramref name="wearer" /> is provided
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Thrown if the <paramref name="wearer" /> is missing its user id or API key
+        /// </exception>
         public Task<InfoResponse> AddMaximumTime(IApiToken wearer, TimeSpan duration)
         {
             if (wearer == null)
@@ -193,6 +224,12 @@ namespace EmlaBot.Services
         /// <param name="holder">The holder.</param>
         /// <param name="duration">The duration.</param>
         /// <returns></returns>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown if no <paramref name="wearer" /> is provided
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Thrown if the <paramref name="wearer" /> is missing its user id or API key
+        /// </exception>
         public Task<InfoResponse> SubtractMaximumTime(IApiToken wearer, IApiToken holder, TimeSpan duration)
         {
             if (wearer == null)
@@ -223,6 +260,12 @@ namespace EmlaBot.Services
         /// <param name="lowerBound">The minimum duration to add.</param>
         /// <param name="upperBound">The maximum duration to add.</param>
         /// <returns></returns>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown if no <paramref name="wearer" /> is provided
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Thrown if the <paramref name="wearer" /> is missing its user id or API key
+        /// </exception>
         public Task<InfoResponse> AddRandomMaximumTime(IApiToken wearer, TimeSpan lowerBound, TimeSpan upperBound)
         {
             if (wearer == null)
@@ -254,6 +297,12 @@ namespace EmlaBot.Services
         /// <param name="lowerBound">The minimum duration to remove.</param>
         /// <param name="upperBound">The maximum duration to remove.</param>
         /// <returns></returns>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown if no <paramref name="wearer" /> is provided
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Thrown if the <paramref name="wearer" /> is missing its user id or API key
+        /// </exception>
         public Task<InfoResponse> SubtractRandomMaximumTime(IApiToken wearer, IApiToken holder, TimeSpan lowerBound, TimeSpan upperBound)
         {
             if (wearer == null)
@@ -288,6 +337,12 @@ namespace EmlaBot.Services
         /// <param name="wearer">The wearer.</param>
         /// <param name="duration">The duration.</param>
         /// <returns></returns>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown if no <paramref name="wearer" /> is provided
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Thrown if the <paramref name="wearer" /> is missing its user id or API key
+        /// </exception>
         public Task<InfoResponse> AddMinimumTime(IApiToken wearer, TimeSpan duration)
         {
             if (wearer == null)
@@ -341,8 +396,13 @@ namespace EmlaBot.Services
         /// <param name="wearer">The wearer.</param>
         /// <param name="lowerBound">The minimum duration to add.</param>
         /// <param name="upperBound">The maximum duration to add.</param>
-        /// <param name="message">The message.</param>
         /// <returns></returns>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown if no <paramref name="wearer" /> is provided
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Thrown if the <paramref name="wearer" /> is missing its user id or API key
+        /// </exception>
         public Task<InfoResponse> AddRandomMinimumTime(IApiToken wearer, TimeSpan lowerBound, TimeSpan upperBound)
         {
             if (wearer == null)
@@ -375,6 +435,12 @@ namespace EmlaBot.Services
         /// <param name="lowerBound">The minimum duration to remove.</param>
         /// <param name="upperBound">The maximum duration to remove.</param>
         /// <returns></returns>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown if no <paramref name="wearer" /> is provided
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Thrown if the <paramref name="wearer" /> is missing its user id or API key
+        /// </exception>
         public Task<InfoResponse> SubtractRandomMinimumTime(IApiToken wearer, IApiToken holder, TimeSpan lowerBound, TimeSpan upperBound)
         {
             if (wearer == null)
@@ -404,26 +470,67 @@ namespace EmlaBot.Services
         }
 
         /// <summary>
-        /// This Request will raise the <paramref name="wearer" />'s number of requirement links by <paramref name="duration" />
+        /// This Request will raise the <paramref name="wearer" />'s number of requirement links by <paramref name="quantity" />
         /// </summary>
         /// <param name="wearer">The wearer.</param>
-        /// <param name="duration">The number of requirement links.</param>
+        /// <param name="quantity">The number of requirement links.</param>
         /// <returns></returns>
-        public Task<InfoResponse> AddRequirementLinks(IApiToken wearer, int duration)
+        /// <exception cref="ArgumentNullException">
+        /// Thrown if no <paramref name="wearer" /> is provided
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Thrown if the <paramref name="wearer" /> is missing its user id or API key
+        /// </exception>
+        public Task<InfoResponse> AddRequirementLinks(IApiToken wearer, int quantity)
         {
-            throw new NotImplementedException();
+            if (wearer == null)
+            {
+                throw new ArgumentNullException(nameof(wearer));
+            }
+
+            if (string.IsNullOrWhiteSpace(wearer.UserId) || string.IsNullOrWhiteSpace(wearer.ApiKey))
+            {
+                throw new ArgumentOutOfRangeException(nameof(wearer), "Missing wearer API credentials");
+            }
+
+            int val = Math.Abs(quantity);
+
+            return GetResponse(new Uri(_config.BaseUrl, $"addrequirement?userid={Uri.EscapeDataString(wearer.UserId)}&apikey={Uri.EscapeDataString(wearer.ApiKey)}&value={val}"));
         }
 
         /// <summary>
-        /// This Request will reduce the <paramref name="wearer" />'s number of requirement links by <paramref name="duration" />
+        /// This Request will reduce the <paramref name="wearer" />'s number of requirement links by <paramref name="quantity" />
         /// </summary>
-        /// <param name="wearer">The wearer.</param>
-        /// <param name="holder">The holder.</param>
-        /// <param name="duration">The number of requirement links.</param>
+        /// <param name="wearer"></param>
+        /// <param name="holder"></param>
+        /// <param name="quantity"></param>
         /// <returns></returns>
-        public Task<InfoResponse> SubtractRequirementLinks(IApiToken wearer, IApiToken holder, int duration)
+        /// <exception cref="ArgumentNullException">
+        /// Thrown if no <paramref name="wearer" /> is provided
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Thrown if the <paramref name="wearer" /> is missing its user id or API key
+        /// </exception>
+        public Task<InfoResponse> SubtractRequirementLinks(IApiToken wearer, IApiToken holder, int quantity)
         {
-            throw new NotImplementedException();
+            if (wearer == null)
+            {
+                throw new ArgumentNullException(nameof(wearer));
+            }
+
+            if (string.IsNullOrWhiteSpace(wearer.UserId) || string.IsNullOrWhiteSpace(wearer.ApiKey))
+            {
+                throw new ArgumentOutOfRangeException(nameof(wearer), "Missing wearer API credentials");
+            }
+
+            if (holder == null || string.IsNullOrWhiteSpace(holder.ApiKey) || string.Equals(wearer.ApiKey, holder.ApiKey, StringComparison.OrdinalIgnoreCase))
+            {
+                return AddRequirementLinks(wearer, quantity);
+            }
+
+            int val = Math.Abs(quantity);
+
+            return GetResponse(new Uri(_config.BaseUrl, $"subrequirement?userid={Uri.EscapeDataString(wearer.UserId)}&apikey={Uri.EscapeDataString(wearer.ApiKey)}&holderapikey={holder.ApiKey}&value={val}"));
         }
 
         /// <summary>
@@ -434,9 +541,33 @@ namespace EmlaBot.Services
         /// <param name="lowerBound">The minimum number of requirement links to add.</param>
         /// <param name="upperBound">The maximum number of requirement links to add.</param>
         /// <returns></returns>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown if no <paramref name="wearer" /> is provided
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Thrown if the <paramref name="wearer" /> is missing its user id or API key
+        /// </exception>
         public Task<InfoResponse> AddRandomRequirementLinks(IApiToken wearer, int lowerBound, int upperBound)
         {
-            throw new NotImplementedException();
+            if (wearer == null)
+            {
+                throw new ArgumentNullException(nameof(wearer));
+            }
+
+            if (string.IsNullOrWhiteSpace(wearer.UserId) || string.IsNullOrWhiteSpace(wearer.ApiKey))
+            {
+                throw new ArgumentOutOfRangeException(nameof(wearer), "Missing wearer API credentials");
+            }
+
+            int from = Math.Abs(lowerBound);
+            int to = Math.Abs(upperBound);
+
+            if (to > from)
+            {
+                (from, to) = (to, from);
+            }
+
+            return GetResponse(new Uri(_config.BaseUrl, $"addrequirementrandom?userid={Uri.EscapeDataString(wearer.UserId)}&apikey={Uri.EscapeDataString(wearer.ApiKey)}&from={from}&to={to}"));
         }
 
         /// <summary>
@@ -448,9 +579,38 @@ namespace EmlaBot.Services
         /// <param name="lowerBound">The minimum number of requirement links to remove.</param>
         /// <param name="upperBound">The maximum number of requirement links to remove.</param>
         /// <returns></returns>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown if no <paramref name="wearer" /> is provided
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Thrown if the <paramref name="wearer" /> is missing its user id or API key
+        /// </exception>
         public Task<InfoResponse> SubtractRandomRequirementLinks(IApiToken wearer, IApiToken holder, int lowerBound, int upperBound)
         {
-            throw new NotImplementedException();
+            if (wearer == null)
+            {
+                throw new ArgumentNullException(nameof(wearer));
+            }
+
+            if (string.IsNullOrWhiteSpace(wearer.UserId) || string.IsNullOrWhiteSpace(wearer.ApiKey))
+            {
+                throw new ArgumentOutOfRangeException(nameof(wearer), "Missing wearer API credentials");
+            }
+
+            if (holder == null || string.IsNullOrWhiteSpace(holder.ApiKey) || string.Equals(wearer.ApiKey, holder.ApiKey, StringComparison.OrdinalIgnoreCase))
+            {
+                return AddRandomRequirementLinks(wearer, lowerBound, upperBound);
+            }
+
+            int from = Math.Abs(lowerBound);
+            int to = Math.Abs(upperBound);
+
+            if (to > from)
+            {
+                (from, to) = (to, from);
+            }
+
+            return GetResponse(new Uri(_config.BaseUrl, $"subrequirementrandom?userid={Uri.EscapeDataString(wearer.UserId)}&apikey={Uri.EscapeDataString(wearer.ApiKey)}&holderapikey={holder.ApiKey}&from={from}&to={to}"));
         }
 
         /// <summary>
@@ -476,8 +636,8 @@ namespace EmlaBot.Services
             {
                 using (var str = await httpResponse.Content.ReadAsStreamAsync())
                 {
-                    // TOOD: Deserialise JSON
-                    throw new NotImplementedException();
+                    var ser = new DataContractSerializer(typeof(InfoResponse));
+                    return (InfoResponse)ser.ReadObject(str);
                 }
             }
             else

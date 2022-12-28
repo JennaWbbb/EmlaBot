@@ -15,9 +15,9 @@ namespace EmlaBot.Models
         public string Twitter { get; set; }
 
         [DataMember(Name = "fetlif")]
-        public int Fetlife { get; set; }
+        public string Fetlife { get; set; }
 
         [DataMember(Name = "discord")]
-        public int Discord { get; set; }
+        public string Discord { get; set; }
     }
 }

@@ -15,11 +15,14 @@ namespace EmlaBot.Console
             _emlaLock = emloaLock;
         }
 
-        public void Process()
+        public async Task Process()
         {
             System.Console.WriteLine("Welcome to Jenna's EmlaBot demo.");
             System.Console.WriteLine("Who is your victim today?");
             var wearer = GetApiToken();
+
+            var victim = await _emlaLock.GetInfo(wearer);
+            System.Console.WriteLine($"Add what do you want to do to {victim.User.UserName}?");
 
             MenuOption option;
             do
@@ -27,9 +30,14 @@ namespace EmlaBot.Console
                 option = PrintMenu();
                 switch (option)
                 {
+                    case MenuOption.Info:
+                        var info = await _emlaLock.GetInfo(wearer);
+                        PrintInfo(info);
+                        break;
+
                     case MenuOption.Add:
                         var duration = GetTimeSpan();
-                        _emlaLock.AddTime(wearer, duration, "");
+                        await _emlaLock.AddTime(wearer, duration, "");
                         break;
                 }
             }
@@ -48,25 +56,40 @@ namespace EmlaBot.Console
             return token;
         }
 
+        private static void PrintInfo(InfoResponse infoResponse)
+        {
+            System.Console.WriteLine(infoResponse.User.UserName);
+        }
+
         private static TimeSpan GetTimeSpan()
         {
             System.Console.WriteLine("Please enter the duration (number of seconds until I get around to parsing time strings):");
-            int seconds = 0;
-            return new TimeSpan(0, 0, seconds);
+
+            var option = System.Console.ReadLine();
+
+            return int.TryParse(option, out int seconds)
+                ? new TimeSpan(0, 0, seconds)
+                : GetTimeSpan();
         }
 
         private static MenuOption PrintMenu()
         {
             // We'll probably want to throw up a little menu
             System.Console.WriteLine($"{MenuOption.None:D}: Exit.");
+            System.Console.WriteLine($"{MenuOption.Info:D}: Get Info.");
             System.Console.WriteLine($"{MenuOption.Add:D}: Add time.");
             // TODO: Rest here
-            return MenuOption.None;
+
+            var option = System.Console.ReadLine();
+            return int.TryParse(option, out int result)
+                ? (MenuOption)result
+                : PrintMenu();
         }
 
         private enum MenuOption
         {
             None,
+            Info,
             Add,
             Subtract,
             AddRandom,

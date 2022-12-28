@@ -3,6 +3,7 @@ using System.Runtime.Serialization;
 
 namespace EmlaBot.Models
 {
+    [DataContract]
     public class User : Account, IApiToken
     {
         [DataMember(Name = "lastclick")]

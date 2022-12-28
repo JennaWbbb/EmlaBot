@@ -9,7 +9,7 @@ namespace EmlaBot.Console
         /// <summary>
         /// Set up the dependency injection, and call the real entry point
         /// </summary>
-        private static void Main()
+        private static async Task Main()
         {
             var serviceProvider = new ServiceCollection()
                .AddLogging(l => l.AddConsole())
@@ -18,7 +18,7 @@ namespace EmlaBot.Console
                .AddEmlaBot()
                .BuildServiceProvider();
 
-            serviceProvider.GetService<ConsoleMenu>().Process();
+            await serviceProvider.GetService<ConsoleMenu>().Process();
         }
     }
 }

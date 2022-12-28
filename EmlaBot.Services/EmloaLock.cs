@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
 
 namespace EmlaBot.Services
@@ -636,7 +636,7 @@ namespace EmlaBot.Services
             {
                 using (var str = await httpResponse.Content.ReadAsStreamAsync())
                 {
-                    var ser = new DataContractSerializer(typeof(InfoResponse));
+                    var ser = new DataContractJsonSerializer(typeof(InfoResponse));
                     return (InfoResponse)ser.ReadObject(str);
                 }
             }

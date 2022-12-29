@@ -1,6 +1,6 @@
 ﻿namespace EmlaBot.Models
 {
-    public enum TimeZone
+    public enum UtcOffset
     {
         Minus12 = 0,
         Minus11 = 1,

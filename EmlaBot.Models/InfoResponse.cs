@@ -6,7 +6,7 @@ namespace EmlaBot.Models
     public class InfoResponse
     {
         [DataMember(Name = "user")]
-        public User User { get; set; }
+        public UtcOffset User { get; set; }
 
         [DataMember(Name = "chastitysession")]
         public ChastitySessionDetails ChastitySession { get; set; }

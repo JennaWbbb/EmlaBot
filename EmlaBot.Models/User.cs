@@ -6,6 +6,10 @@ namespace EmlaBot.Models
     [DataContract]
     public class User : Account, IApiToken
     {
+        /// <summary>
+        /// Gets or sets the time-stamp of the last action by the user
+        /// </summary>
+        /// <value>The time-stamp of the last action by the user.</value>
         [DataMember(Name = "lastclick")]
         public int LastClick { get; set; }
 
@@ -15,15 +19,31 @@ namespace EmlaBot.Models
         [DataMember(Name = "financialinterests")]
         public int FinancialInterests { get; set; }
 
+        /// <summary>
+        /// Gets or sets the wearer rating count.
+        /// </summary>
+        /// <value>The wearer rating count.</value>
         [DataMember(Name = "wearerrates")]
-        public int WearerRates { get; set; }
+        public int WearerRatingCount { get; set; }
 
+        /// <summary>
+        /// Gets or sets the wearer rating.
+        /// </summary>
+        /// <value>The wearer rating on a 0 to 10 scale.</value>
         [DataMember(Name = "wearerrating")]
         public int WearerRating { get; set; }
 
+        /// <summary>
+        /// Gets or sets the holder rating count.
+        /// </summary>
+        /// <value>The holder rating count.</value>
         [DataMember(Name = "holderrates")]
-        public int HolderRates { get; set; }
+        public int HolderRatingCount { get; set; }
 
+        /// <summary>
+        /// Gets or sets the holder rating.
+        /// </summary>
+        /// <value>The holder rating on a 0 to 10 scale.</value>
         [DataMember(Name = "holderrating")]
         public int HolderRating { get; set; }
 
@@ -35,65 +55,93 @@ namespace EmlaBot.Models
         /// </summary>
         /// <value>The count of sessions completed.</value>
         [DataMember(Name = "sessions")]
-        public int Sessions { get; set; }
+        public int SessionCount { get; set; }
 
         /// <summary>
         /// Gets or sets the cont of failed sessions.
         /// </summary>
         /// <value>The count of sessions failed completed.</value>
         [DataMember(Name = "failedsessions")]
-        public int FailedSessions { get; set; }
+        public int FailedSessionCount { get; set; }
 
         /// <summary>
         /// Gets or sets the duration of the longest session, in seconds.
         /// </summary>
         /// <value>The duration of the longest session, in seconds.</value>
         [DataMember(Name = "maxsession")]
-        public int MaxSession { get; set; }
+        public int LongestSessionDuration { get; set; }
 
         /// <summary>
         /// Gets or sets the duration of the shortest session, in seconds.
         /// </summary>
         /// <value>The duration of the shortest session, in seconds.</value>
         [DataMember(Name = "minsession")]
-        public int MinSession { get; set; }
+        public int ShortestSessionDuration { get; set; }
 
         /// <summary>
         /// Gets or sets the total duration in sessions, in seconds.
         /// </summary>
         /// <value>The total duration in sessions, in seconds.</value>
         [DataMember(Name = "sumsession")]
-        public int SumSession { get; set; }
+        public int TotalLockedDuration { get; set; }
 
         /// <summary>
-        /// Gets or sets the timestamp of when the account was created
+        /// Gets or sets the time-stamp of when the account was created
         /// </summary>
-        /// <value>The timestamp of when the account was created.</value>
+        /// <value>The time-stamp of when the account was created.</value>
         [DataMember(Name = "membersince")]
         public int MemberSince { get; set; }
 
         /// <summary>
-        /// Gets or sets the timestamp of the user's birthday
+        /// Gets or sets the time-stamp of the user's birthday
         /// </summary>
-        /// <value>The timestamp of the user's birthday.</value>
+        /// <value>The time-stamp of the user's birthday.</value>
         [DataMember(Name = "dateofbirth")]
         public int DateOfBirth { get; set; }
 
+        /// <summary>
+        /// Gets or sets the description.
+        /// </summary>
+        /// <value>The description.</value>
         [DataMember(Name = "description")]
         public string Description { get; set; }
 
+        /// <summary>
+        /// Gets or sets the gender.
+        /// </summary>
+        /// <value>The gender.</value>
         [DataMember(Name = "gender")]
-        public int Gender { get; set; }
+        public Gender Gender { get; set; }
 
+        /// <summary>
+        /// Gets or sets the ISO 639-1 language code.
+        /// </summary>
+        /// <value>The ISO 639-1 language code.</value>
         [DataMember(Name = "language")]
         public string Language { get; set; }
 
+        /// <summary>
+        /// Gets or sets the chastity role.
+        /// </summary>
+        /// <value>The chastity role.</value>
         [DataMember(Name = "chastityrole")]
-        public Role ChastityRole { get; set; }
+        public ChastityRole ChastityRole { get; set; }
 
+        /// <summary>
+        /// Gets or sets the difference to UTC for the user.
+        /// </summary>
+        /// <value>The difference to UTC for the user.</value>
+        /// <remarks>
+        /// No automatic adjustment is made for daylight savings, so can be wrong if the user hasn't
+        /// updated it, if they change observing daylight savings
+        /// </remarks>
         [DataMember(Name = "timezone")]
-        public int Timezone { get; set; }
+        public UtcOffset Timezone { get; set; }
 
+        /// <summary>
+        /// Gets or sets whether the user has different things visible.
+        /// </summary>
+        /// <value>The visibilities.</value>
         [DataMember(Name = "visibilities")]
         public Visibilities Visibilities { get; set; }
 
@@ -103,12 +151,24 @@ namespace EmlaBot.Models
         [DataMember(Name = "showsessionimages")]
         public int ShowSessionImages { get; set; }
 
-        [DataMember(Name = "discorduserid")]
+        /// <summary>
+        /// Gets or sets the discord user identifier.
+        /// </summary>
+        /// <value>The discord user identifier.</value>
+        [DataMember(Name = "discord_userid")]
         public string DiscordUserId { get; set; }
 
+        /// <summary>
+        /// Gets or sets the social account details.
+        /// </summary>
+        /// <value>The socials.</value>
         [DataMember(Name = "socials")]
         public SocialProfiles Socials { get; set; }
 
+        /// <summary>
+        /// Gets or sets the email address.
+        /// </summary>
+        /// <value>The email.</value>
         [DataMember(Name = "email")]
         public string Email { get; set; }
 
@@ -118,18 +178,38 @@ namespace EmlaBot.Models
         [DataMember(Name = "trustlevel")]
         public int TrustLevel { get; set; }
 
+        /// <summary>
+        /// Gets or sets the session keys the user is holding.
+        /// </summary>
+        /// <value>The holder session keys.</value>
         [DataMember(Name = "holdersessions")]
         public List<string> HolderSessionKeys { get; set; }
 
+        /// <summary>
+        /// Gets or sets the count of sessions left that the use could hold.
+        /// </summary>
+        /// <value>The holder sessions left.</value>
         [DataMember(Name = "holdersessionsleft")]
         public int HolderSessionsLeft { get; set; }
 
+        /// <summary>
+        /// Gets or sets the premium services.
+        /// </summary>
+        /// <value>The premium services.</value>
         [DataMember(Name = "premiumservices")]
         public PremiumServices PremiumServices { get; set; }
 
+        /// <summary>
+        /// Gets or sets the theme.
+        /// </summary>
+        /// <value>The theme.</value>
         [DataMember(Name = "theme")]
-        public int Theme { get; set; }
+        public Theme Theme { get; set; }
 
+        /// <summary>
+        /// Gets or sets the API key.
+        /// </summary>
+        /// <value>The API key.</value>
         [DataMember(Name = "apikey")]
         public string ApiKey { get; set; }
 
@@ -146,25 +226,44 @@ namespace EmlaBot.Models
         /// Gets or sets the weight declaration.
         /// </summary>
         /// <value>The weight declaration.</value>
-        /// <remarks>TODO: Need to check if this is the units, or the weight</remarks>
         [DataMember(Name = "weightdeclaration")]
-        public int WeightDeclaration { get; set; }
+        public WeightUnits WeightDeclaration { get; set; }
 
+        /// <summary>
+        /// Gets or sets the time format.
+        /// </summary>
+        /// <value>The time format.</value>
         [DataMember(Name = "timeformet")]
-        public int TimeFormat { get; set; }
+        public TimeFormat TimeFormat { get; set; }
 
+        /// <summary>
+        /// Gets or sets the time-stamp of the last synchronisation of data with Chastikey
+        /// </summary>
+        /// <value>The time-stamp of the last synchronisation of data with Chastikey.</value>
         [DataMember(Name = "lastchastikeysync")]
         public int LastChastikeySync { get; set; }
 
         [DataMember(Name = "ageverificationsleft")]
         public int AgeVerificationsLeft { get; set; }
 
+        /// <summary>
+        /// Gets or sets the type of the account.
+        /// </summary>
+        /// <value>The type of the account.</value>
         [DataMember(Name = "accounttype")]
-        public int AccountType { get; set; }
+        public AccountType AccountType { get; set; }
 
+        /// <summary>
+        /// Gets or sets the main account identifier.
+        /// </summary>
+        /// <value>The main account identifier.</value>
         [DataMember(Name = "mainaccountid")]
         public string MainAccountId { get; set; }
 
+        /// <summary>
+        /// Gets or sets any accounts that list this as their main account.
+        /// </summary>
+        /// <value>The accounts.</value>
         [DataMember(Name = "accounts")]
         public List<Account> Accounts { get; set; }
     }

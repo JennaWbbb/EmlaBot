@@ -28,6 +28,7 @@ namespace EmlaBot.Console
             do
             {
                 option = PrintMenu();
+                TimeSpan duration;
                 switch (option)
                 {
                     case MenuOption.Info:
@@ -36,8 +37,13 @@ namespace EmlaBot.Console
                         break;
 
                     case MenuOption.Add:
-                        var duration = GetTimeSpan();
+                        duration = GetTimeSpan();
                         await _emlaLock.AddTime(wearer, duration, "");
+                        break;
+
+                    case MenuOption.AddMaximum:
+                        duration = GetTimeSpan();
+                        await _emlaLock.AddMaximumTime(wearer, duration);
                         break;
                 }
             }
@@ -78,6 +84,7 @@ namespace EmlaBot.Console
             System.Console.WriteLine($"{MenuOption.None:D}: Exit.");
             System.Console.WriteLine($"{MenuOption.Info:D}: Get Info.");
             System.Console.WriteLine($"{MenuOption.Add:D}: Add time.");
+            System.Console.WriteLine($"{MenuOption.AddMaximum:D}: Add max time.");
             // TODO: Rest here
 
             var option = System.Console.ReadLine();

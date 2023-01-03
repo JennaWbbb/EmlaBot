@@ -2,7 +2,24 @@
 
 	<PropertyGroup>
 		<TargetFramework>netstandard1.0</TargetFramework>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/JennaWbbb/EmlaBot.git</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/JennaWbbb/EmlaBot</PackageProjectUrl>
+		<Title>EmlaBot.Models</Title>
+		<OutputType>Library</OutputType>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Description>Object model for the EmlaLock API</Description>
+		<PackageLicenseExpression>BSD-3-Clause</PackageLicenseExpression>
+		<EnableNETAnalyzers>True</EnableNETAnalyzers>
+		<AnalysisLevel>latest-recommended</AnalysisLevel>
 	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 
 	<ItemGroup>
 	  <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />

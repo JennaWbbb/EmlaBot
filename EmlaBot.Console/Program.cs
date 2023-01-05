@@ -18,7 +18,14 @@ namespace EmlaBot.Console
                .AddEmlaBot()
                .BuildServiceProvider();
 
-            await serviceProvider.GetService<ConsoleMenu>().Process();
+            var service = serviceProvider.GetService<ConsoleMenu>();
+
+            if (service == null)
+            {
+                return;
+            }
+
+            await service.Process();
         }
     }
 }

@@ -85,7 +85,7 @@ namespace EmlaBot.Console
             System.Console.WriteLine($"{MenuOption.Info:D}: Get Info.");
             System.Console.WriteLine($"{MenuOption.Add:D}: Add time.");
             System.Console.WriteLine($"{MenuOption.AddMaximum:D}: Add max time.");
-            // TODO: Rest here
+            // Add more here as desired/required
 
             var option = System.Console.ReadLine();
             return int.TryParse(option, out int result)

@@ -629,7 +629,7 @@ namespace EmlaBot.Services
         /// <param name="uri">The URI.</param>
         /// <returns></returns>
         /// <exception cref="System.NotImplementedException"></exception>
-        public async Task<InfoResponse> GetResponse(Uri uri)
+        public static async Task<InfoResponse> GetResponse(Uri uri)
         {
             var httpResponse = await _emlaClient.GetAsync(uri);
             if (httpResponse.IsSuccessStatusCode)

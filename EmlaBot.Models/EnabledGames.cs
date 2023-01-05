@@ -6,18 +6,18 @@ namespace EmlaBot.Models
     public class EnabledGames
     {
         [DataMember(Name = "blackjack")]
-        public int Blackjack { get; set; }
+        public Toggle Blackjack { get; set; }
 
         [DataMember(Name = "slotmachine")]
-        public int SlotMachine { get; set; }
+        public Toggle SlotMachine { get; set; }
 
         [DataMember(Name = "bingo")]
-        public int Bingo { get; set; }
+        public Toggle Bingo { get; set; }
 
         [DataMember(Name = "voting")]
-        public int Voting { get; set; }
+        public Toggle Voting { get; set; }
 
         [DataMember(Name = "wheeloffortune")]
-        public int WheelOfFortune { get; set; }
+        public Toggle WheelOfFortune { get; set; }
     }
 }

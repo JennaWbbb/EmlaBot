@@ -6,15 +6,15 @@ namespace EmlaBot.Models
     public class SelectedDisplayMode
     {
         [DataMember(Name = "timepassed")]
-        public int TimePassed { get; set; }
+        public Toggle TimePassed { get; set; }
 
         [DataMember(Name = "timeleft")]
-        public int TimeLeft { get; set; }
+        public Toggle TimeLeft { get; set; }
 
         [DataMember(Name = "showapproximate")]
-        public int ShowApproximate { get; set; }
+        public Toggle ShowApproximate { get; set; }
 
         [DataMember(Name = "surpriseme")]
-        public int SurpriseMe { get; set; }
+        public Toggle SurpriseMe { get; set; }
     }
 }

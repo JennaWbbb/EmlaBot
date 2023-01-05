@@ -6,21 +6,21 @@ namespace EmlaBot.Models
     public class Notifications
     {
         [DataMember(Name = "receivedmessages")]
-        public int ReceivedMessages { get; set; }
+        public Toggle ReceivedMessages { get; set; }
 
         [DataMember(Name = "keyidused")]
-        public int KeyIdUsed { get; set; }
+        public Toggle KeyIdUsed { get; set; }
 
         [DataMember(Name = "combinationpicture")]
-        public int CombinationPicture { get; set; }
+        public Toggle CombinationPicture { get; set; }
 
         [DataMember(Name = "offeredsessions")]
-        public int OfferedSessions { get; set; }
+        public Toggle OfferedSessions { get; set; }
 
         [DataMember(Name = "wearerhasendedsession")]
-        public int WearerHasEndedSession { get; set; }
+        public Toggle WearerHasEndedSession { get; set; }
 
         [DataMember(Name = "emlalockupdates")]
-        public int EmlalockUpdates { get; set; }
+        public Toggle EmlalockUpdates { get; set; }
     }
 }

@@ -47,8 +47,12 @@ namespace EmlaBot.Models
         [DataMember(Name = "holderrating")]
         public int HolderRating { get; set; }
 
+        /// <summary>
+        /// Gets or sets whether the age has been verified.
+        /// </summary>
+        /// <value>The age verified.</value>
         [DataMember(Name = "ageverified")]
-        public int AgeVerified { get; set; }
+        public Toggle AgeVerified { get; set; }
 
         /// <summary>
         /// Gets or sets the cont of sessions completed.
@@ -146,10 +150,10 @@ namespace EmlaBot.Models
         public Visibilities Visibilities { get; set; }
 
         [DataMember(Name = "discordvisibile")]
-        public int DiscordVisible { get; set; }
+        public Toggle DiscordVisible { get; set; }
 
         [DataMember(Name = "showsessionimages")]
-        public int ShowSessionImages { get; set; }
+        public Toggle ShowSessionImages { get; set; }
 
         /// <summary>
         /// Gets or sets the discord user identifier.
@@ -173,7 +177,7 @@ namespace EmlaBot.Models
         public string Email { get; set; }
 
         [DataMember(Name = "emailverified")]
-        public int EmailVerified { get; set; }
+        public Toggle EmailVerified { get; set; }
 
         [DataMember(Name = "trustlevel")]
         public int TrustLevel { get; set; }

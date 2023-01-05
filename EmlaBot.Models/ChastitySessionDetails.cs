@@ -175,7 +175,7 @@ namespace EmlaBot.Models
         public int PictureBy { get; set; }
 
         [DataMember(Name = "incleaning")]
-        public int InCleaning { get; set; }
+        public Toggle InCleaning { get; set; }
 
         [DataMember(Name = "cleaningstarted")]
         public int CleaningStarted { get; set; }
@@ -229,7 +229,7 @@ namespace EmlaBot.Models
         public List<HolderHistory> HolderHistory { get; set; }
 
         [DataMember(Name = "locktober")]
-        public int Locktober { get; set; }
+        public Toggle Locktober { get; set; }
 
         [DataMember(Name = "friendlinkid")]
         public string FriendLinkId { get; set; }

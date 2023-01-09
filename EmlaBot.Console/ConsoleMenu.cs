@@ -8,9 +8,9 @@ namespace EmlaBot.Console
     /// </summary>
     public class ConsoleMenu
     {
-        private readonly IEmloaLock _emlaLock;
+        private readonly IEmlaLock _emlaLock;
 
-        public ConsoleMenu(IEmloaLock emloaLock)
+        public ConsoleMenu(IEmlaLock emloaLock)
         {
             _emlaLock = emloaLock;
         }

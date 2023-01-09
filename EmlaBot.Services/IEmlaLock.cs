@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace EmlaBot.Services
 {
-    public interface IEmloaLock
+    public interface IEmlaLock
     {
         Task<InfoResponse> AddMaximumTime(IApiToken wearer, TimeSpan duration);
 

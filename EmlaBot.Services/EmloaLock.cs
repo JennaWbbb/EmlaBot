@@ -9,14 +9,14 @@ namespace EmlaBot.Services
 {
     /// <summary>
     /// </summary>
-    /// <seealso cref="EmlaBot.Services.IEmloaLock" />
-    public class EmloaLock : IEmloaLock
+    /// <seealso cref="EmlaBot.Services.IEmlaLock" />
+    public class EmlaLock : IEmlaLock
     {
         private readonly IEmlaLockConfig _config;
 
         private static readonly HttpClient _emlaClient = new HttpClient();
 
-        public EmloaLock(IEmlaLockConfig config)
+        public EmlaLock(IEmlaLockConfig config)
         {
             _config = config;
         }

@@ -12,6 +12,8 @@
     <PackageLicenseExpression>BSD-3-Clause</PackageLicenseExpression>
     <EnableNETAnalyzers>True</EnableNETAnalyzers>
     <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <Authors>JennaWbbb</Authors>
+    <PackageReleaseNotes>Fixing up spelling of EmlaLock service, and it's interface for DI use</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

@@ -12,6 +12,7 @@
 		<PackageLicenseExpression>BSD-3-Clause</PackageLicenseExpression>
 		<EnableNETAnalyzers>True</EnableNETAnalyzers>
 		<AnalysisLevel>latest-recommended</AnalysisLevel>
+		<PackageReleaseNotes>Fix a bug with date of birth values falling outside the expected range</PackageReleaseNotes>
 	</PropertyGroup>
 
 	<ItemGroup>

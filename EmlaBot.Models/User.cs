@@ -101,7 +101,7 @@ namespace EmlaBot.Models
         /// </summary>
         /// <value>The time-stamp of the user's birthday.</value>
         [DataMember(Name = "dateofbirth")]
-        public int DateOfBirth { get; set; }
+        public long DateOfBirth { get; set; }
 
         /// <summary>
         /// Gets or sets the description.

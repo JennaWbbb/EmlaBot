@@ -18,5 +18,12 @@ namespace EmlaBot.Models
         /// <value>The chastity session.</value>
         [DataMember(Name = "chastitysession")]
         public ChastitySessionDetails ChastitySession { get; set; }
+
+        /// <summary>
+        /// Gets or sets the current verification detail.
+        /// </summary>
+        /// <value>The current verification detail.</value>
+        [DataMember(Name = "verification")]
+        public Verification Verification { get; set; }
     }
 }

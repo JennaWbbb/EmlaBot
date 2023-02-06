@@ -36,7 +36,7 @@ namespace EmlaBot.Services
         {
             return user == null
                 ? throw new ArgumentNullException(nameof(user))
-                : GetResponse(new Uri(_config.BaseUrl, $"info?userid={Uri.EscapeDataString(user.UserId)}&apikey={Uri.EscapeDataString(user.ApiKey)}"));
+                : GetResponse(new Uri(_config.BaseUrl, $"info?userid={Uri.EscapeDataString(user.UserId.Trim())}&apikey={Uri.EscapeDataString(user.ApiKey.Trim())}"));
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace EmlaBot.Services
             int val = (int)Math.Abs(duration.TotalSeconds);
             string msg = !string.IsNullOrWhiteSpace(message) ? $"&text={Uri.EscapeDataString(message)}" : string.Empty;
 
-            return GetResponse(new Uri(_config.BaseUrl, $"add?userid={Uri.EscapeDataString(wearer.UserId)}&apikey={Uri.EscapeDataString(wearer.ApiKey)}&value={val}{msg}"));
+            return GetResponse(new Uri(_config.BaseUrl, $"add?userid={Uri.EscapeDataString(wearer.UserId.Trim())}&apikey={Uri.EscapeDataString(wearer.ApiKey.Trim())}&value={val}{msg}"));
         }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace EmlaBot.Services
             int val = (int)Math.Abs(duration.TotalSeconds);
             string msg = !string.IsNullOrWhiteSpace(message) ? $"&text={Uri.EscapeDataString(message)}" : string.Empty;
 
-            return GetResponse(new Uri(_config.BaseUrl, $"sub?userid={Uri.EscapeDataString(wearer.UserId)}&apikey={Uri.EscapeDataString(wearer.ApiKey)}&holderapikey={holder.ApiKey}&value={val}{msg}"));
+            return GetResponse(new Uri(_config.BaseUrl, $"sub?userid={Uri.EscapeDataString(wearer.UserId.Trim())}&apikey={Uri.EscapeDataString(wearer.ApiKey.Trim())}&holderapikey={holder.ApiKey.Trim()}&value={val}{msg}"));
         }
 
         /// <summary>
@@ -139,7 +139,7 @@ namespace EmlaBot.Services
                 (from, to) = (to, from);
             }
 
-            return GetResponse(new Uri(_config.BaseUrl, $"addrandom?userid={Uri.EscapeDataString(wearer.UserId)}&apikey={Uri.EscapeDataString(wearer.ApiKey)}&from={from}&to={to}"));
+            return GetResponse(new Uri(_config.BaseUrl, $"addrandom?userid={Uri.EscapeDataString(wearer.UserId.Trim())}&apikey={Uri.EscapeDataString(wearer.ApiKey.Trim())}&from={from}&to={to}"));
         }
 
         /// <summary>
@@ -185,7 +185,7 @@ namespace EmlaBot.Services
                 (from, to) = (to, from);
             }
 
-            return GetResponse(new Uri(_config.BaseUrl, $"subrandom?userid={Uri.EscapeDataString(wearer.UserId)}&apikey={Uri.EscapeDataString(wearer.ApiKey)}&holderapikey={holder.ApiKey}&from={from}&to={to}"));
+            return GetResponse(new Uri(_config.BaseUrl, $"subrandom?userid={Uri.EscapeDataString(wearer.UserId.Trim())}&apikey={Uri.EscapeDataString(wearer.ApiKey.Trim())}&holderapikey={holder.ApiKey.Trim()}&from={from}&to={to}"));
         }
 
         /// <summary>
@@ -214,7 +214,7 @@ namespace EmlaBot.Services
 
             int val = (int)Math.Abs(duration.TotalSeconds);
 
-            return GetResponse(new Uri(_config.BaseUrl, $"addmaximum?userid={Uri.EscapeDataString(wearer.UserId)}&apikey={Uri.EscapeDataString(wearer.ApiKey)}&value={val}"));
+            return GetResponse(new Uri(_config.BaseUrl, $"addmaximum?userid={Uri.EscapeDataString(wearer.UserId.Trim())}&apikey={Uri.EscapeDataString(wearer.ApiKey.Trim())}&value={val}"));
         }
 
         /// <summary>
@@ -249,7 +249,7 @@ namespace EmlaBot.Services
 
             int val = (int)Math.Abs(duration.TotalSeconds);
 
-            return GetResponse(new Uri(_config.BaseUrl, $"submaximum?userid={Uri.EscapeDataString(wearer.UserId)}&apikey={Uri.EscapeDataString(wearer.ApiKey)}&holderapikey={holder.ApiKey}&value={val}"));
+            return GetResponse(new Uri(_config.BaseUrl, $"submaximum?userid={Uri.EscapeDataString(wearer.UserId.Trim())}&apikey={Uri.EscapeDataString(wearer.ApiKey.Trim())}&holderapikey={holder.ApiKey.Trim()}&value={val}"));
         }
 
         /// <summary>
@@ -286,7 +286,7 @@ namespace EmlaBot.Services
                 (from, to) = (to, from);
             }
 
-            return GetResponse(new Uri(_config.BaseUrl, $"addmaximumrandom?userid={Uri.EscapeDataString(wearer.UserId)}&apikey={Uri.EscapeDataString(wearer.ApiKey)}&from={from}&to={to}"));
+            return GetResponse(new Uri(_config.BaseUrl, $"addmaximumrandom?userid={Uri.EscapeDataString(wearer.UserId.Trim())}&apikey={Uri.EscapeDataString(wearer.ApiKey.Trim())}&from={from}&to={to}"));
         }
 
         /// <summary>
@@ -328,7 +328,7 @@ namespace EmlaBot.Services
                 (from, to) = (to, from);
             }
 
-            return GetResponse(new Uri(_config.BaseUrl, $"submaximumrandom?userid={Uri.EscapeDataString(wearer.UserId)}&apikey={Uri.EscapeDataString(wearer.ApiKey)}&holderapikey={holder.ApiKey}&from={from}&to={to}"));
+            return GetResponse(new Uri(_config.BaseUrl, $"submaximumrandom?userid={Uri.EscapeDataString(wearer.UserId.Trim())}&apikey={Uri.EscapeDataString(wearer.ApiKey.Trim())}&holderapikey={holder.ApiKey.Trim()}&from={from}&to={to}"));
         }
 
         /// <summary>
@@ -357,7 +357,7 @@ namespace EmlaBot.Services
 
             int val = (int)Math.Abs(duration.TotalSeconds);
 
-            return GetResponse(new Uri(_config.BaseUrl, $"addminimum?userid={Uri.EscapeDataString(wearer.UserId)}&apikey={Uri.EscapeDataString(wearer.ApiKey)}&value={val}"));
+            return GetResponse(new Uri(_config.BaseUrl, $"addminimum?userid={Uri.EscapeDataString(wearer.UserId.Trim())}&apikey={Uri.EscapeDataString(wearer.ApiKey.Trim())}&value={val}"));
         }
 
         /// <summary>
@@ -386,7 +386,7 @@ namespace EmlaBot.Services
 
             int val = (int)Math.Abs(duration.TotalSeconds);
 
-            return GetResponse(new Uri(_config.BaseUrl, $"subminimum?userid={Uri.EscapeDataString(wearer.UserId)}&apikey={Uri.EscapeDataString(wearer.ApiKey)}&holderapikey={holder.ApiKey}&value={val}"));
+            return GetResponse(new Uri(_config.BaseUrl, $"subminimum?userid={Uri.EscapeDataString(wearer.UserId.Trim())}&apikey={Uri.EscapeDataString(wearer.ApiKey.Trim())}&holderapikey={holder.ApiKey.Trim()}&value={val}"));
         }
 
         /// <summary>
@@ -423,7 +423,7 @@ namespace EmlaBot.Services
                 (from, to) = (to, from);
             }
 
-            return GetResponse(new Uri(_config.BaseUrl, $"addminimumrandom?userid={Uri.EscapeDataString(wearer.UserId)}&apikey={Uri.EscapeDataString(wearer.ApiKey)}&from={from}&to={to}"));
+            return GetResponse(new Uri(_config.BaseUrl, $"addminimumrandom?userid={Uri.EscapeDataString(wearer.UserId.Trim())}&apikey={Uri.EscapeDataString(wearer.ApiKey.Trim())}&from={from}&to={to}"));
         }
 
         /// <summary>
@@ -466,7 +466,7 @@ namespace EmlaBot.Services
                 (from, to) = (to, from);
             }
 
-            return GetResponse(new Uri(_config.BaseUrl, $"subminimumrandom?userid={Uri.EscapeDataString(wearer.UserId)}&apikey={Uri.EscapeDataString(wearer.ApiKey)}&holderapikey={holder.ApiKey}&from={from}&to={to}"));
+            return GetResponse(new Uri(_config.BaseUrl, $"subminimumrandom?userid={Uri.EscapeDataString(wearer.UserId.Trim())}&apikey={Uri.EscapeDataString(wearer.ApiKey.Trim())}&holderapikey={holder.ApiKey.Trim()}&from={from}&to={to}"));
         }
 
         /// <summary>
@@ -495,7 +495,7 @@ namespace EmlaBot.Services
 
             int val = Math.Abs(quantity);
 
-            return GetResponse(new Uri(_config.BaseUrl, $"addrequirement?userid={Uri.EscapeDataString(wearer.UserId)}&apikey={Uri.EscapeDataString(wearer.ApiKey)}&value={val}"));
+            return GetResponse(new Uri(_config.BaseUrl, $"addrequirement?userid={Uri.EscapeDataString(wearer.UserId.Trim())}&apikey={Uri.EscapeDataString(wearer.ApiKey.Trim())}&value={val}"));
         }
 
         /// <summary>
@@ -530,7 +530,7 @@ namespace EmlaBot.Services
 
             int val = Math.Abs(quantity);
 
-            return GetResponse(new Uri(_config.BaseUrl, $"subrequirement?userid={Uri.EscapeDataString(wearer.UserId)}&apikey={Uri.EscapeDataString(wearer.ApiKey)}&holderapikey={holder.ApiKey}&value={val}"));
+            return GetResponse(new Uri(_config.BaseUrl, $"subrequirement?userid={Uri.EscapeDataString(wearer.UserId.Trim())}&apikey={Uri.EscapeDataString(wearer.ApiKey.Trim())}&holderapikey={holder.ApiKey.Trim()}&value={val}"));
         }
 
         /// <summary>
@@ -567,7 +567,7 @@ namespace EmlaBot.Services
                 (from, to) = (to, from);
             }
 
-            return GetResponse(new Uri(_config.BaseUrl, $"addrequirementrandom?userid={Uri.EscapeDataString(wearer.UserId)}&apikey={Uri.EscapeDataString(wearer.ApiKey)}&from={from}&to={to}"));
+            return GetResponse(new Uri(_config.BaseUrl, $"addrequirementrandom?userid={Uri.EscapeDataString(wearer.UserId.Trim())}&apikey={Uri.EscapeDataString(wearer.ApiKey.Trim())}&from={from}&to={to}"));
         }
 
         /// <summary>
@@ -610,7 +610,7 @@ namespace EmlaBot.Services
                 (from, to) = (to, from);
             }
 
-            return GetResponse(new Uri(_config.BaseUrl, $"subrequirementrandom?userid={Uri.EscapeDataString(wearer.UserId)}&apikey={Uri.EscapeDataString(wearer.ApiKey)}&holderapikey={holder.ApiKey}&from={from}&to={to}"));
+            return GetResponse(new Uri(_config.BaseUrl, $"subrequirementrandom?userid={Uri.EscapeDataString(wearer.UserId.Trim())}&apikey={Uri.EscapeDataString(wearer.ApiKey.Trim())}&holderapikey={holder.ApiKey.Trim()}&from={from}&to={to}"));
         }
 
         /// <summary>

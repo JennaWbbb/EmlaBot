@@ -1,6 +1,7 @@
 ﻿using EmlaBot.Models;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
@@ -642,8 +643,19 @@ namespace EmlaBot.Services
             }
             else
             {
-                // TOOD: This needs to be way better
-                throw new HttpRequestException(httpResponse.ReasonPhrase);
+                if (httpResponse.StatusCode == (HttpStatusCode)429)
+                {
+                    throw new RateLimitedException(await httpResponse.Content.ReadAsStringAsync());
+                }
+                else if (httpResponse.StatusCode == HttpStatusCode.BadRequest)
+                {
+                    throw new InvalidApiKeyException(await httpResponse.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    // TOOD: This needs to be way better
+                    throw new HttpRequestException(await httpResponse.Content.ReadAsStringAsync());
+                }
             }
         }
     }

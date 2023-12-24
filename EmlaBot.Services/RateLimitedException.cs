@@ -4,7 +4,7 @@ using System.Net.Http;
 namespace EmlaBot.Services
 {
     [Serializable]
-    internal class RateLimitedException : HttpRequestException
+    public class RateLimitedException : HttpRequestException
     {
         public RateLimitedException()
         {

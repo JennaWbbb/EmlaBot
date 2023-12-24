@@ -4,7 +4,7 @@ using System.Net.Http;
 namespace EmlaBot.Services
 {
     [Serializable]
-    internal class InvalidApiKeyException : HttpRequestException
+    public class InvalidApiKeyException : HttpRequestException
     {
         public InvalidApiKeyException()
         {

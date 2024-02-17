@@ -145,7 +145,22 @@ namespace EmlaBot.Models
         public int PenaltyGamesMinimum { get; set; }
 
         [DataMember(Name = "enddate")]
-        public int EndDate { get; set; }
+        public string RawEndDate { get; set; }
+
+        public int EndDate
+        {
+            get
+            {
+                if (int.TryParse(RawEndDate, out var endDate))
+                {
+                    return endDate;
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+        }
 
         [DataMember(Name = "canbeclosed")]
         public bool CanBeClosed { get; set; }

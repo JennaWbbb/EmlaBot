@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>netstandard1.0</TargetFramework>
+		<TargetFramework>netstandard2.0</TargetFramework>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<RepositoryUrl>https://github.com/JennaWbbb/EmlaBot.git</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/JennaWbbb/EmlaBot</PackageProjectUrl>
@@ -24,6 +24,7 @@
 
 	<ItemGroup>
 	  <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
+	  <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
 	</ItemGroup>
 
 </Project>

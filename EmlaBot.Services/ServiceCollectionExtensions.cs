@@ -8,7 +8,8 @@ namespace EmlaBot.Services
         {
             return services
                 .AddSingleton<IEmlaLockConfig, EmlaLockConfig>()
-                .AddSingleton<IEmlaLock, EmlaLock>();
+                .AddSingleton<IEmlaLock, EmlaLock>()
+                .AddHttpClient();
         }
     }
 }

@@ -23,7 +23,7 @@ namespace EmlaBot.Services
 
         Task<InfoResponse> AddTime(IApiToken wearer, TimeSpan duration, string message);
 
-        Task<IEnumerable<AggregatedAction>> GetFeed(string sessionId);
+        IAsyncEnumerable<AggregatedAction> GetFeed(string sessionId);
 
         Task<InfoResponse> GetInfo(IApiToken user);
 

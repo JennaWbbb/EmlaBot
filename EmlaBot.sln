@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmlaBot.Models", "EmlaBot.M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmlaBot.Services", "EmlaBot.Services\EmlaBot.Services.csproj", "{749BD563-12A3-45AB-ADF0-DDD2930D5884}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmlaBot.Services.UnitTests", "EmlaBot.Services.UnitTests\EmlaBot.Services.UnitTests.csproj", "{64E399FA-171A-490D-A61F-0D27B03608BE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{749BD563-12A3-45AB-ADF0-DDD2930D5884}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{749BD563-12A3-45AB-ADF0-DDD2930D5884}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{749BD563-12A3-45AB-ADF0-DDD2930D5884}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64E399FA-171A-490D-A61F-0D27B03608BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64E399FA-171A-490D-A61F-0D27B03608BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64E399FA-171A-490D-A61F-0D27B03608BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64E399FA-171A-490D-A61F-0D27B03608BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

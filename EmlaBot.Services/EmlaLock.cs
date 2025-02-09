@@ -1,10 +1,13 @@
 ﻿using EmlaBot.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace EmlaBot.Services
 {
@@ -14,12 +17,12 @@ namespace EmlaBot.Services
     public class EmlaLock : IEmlaLock
     {
         private readonly IEmlaLockConfig _config;
+        private readonly IHttpClientFactory _httpClientFactory;
 
-        private static readonly HttpClient _emlaClient = new HttpClient();
-
-        public EmlaLock(IEmlaLockConfig config)
+        public EmlaLock(IEmlaLockConfig config, IHttpClientFactory httpClientFactory)
         {
             _config = config;
+            _httpClientFactory = httpClientFactory;
         }
 
         /// <summary>
@@ -619,19 +622,89 @@ namespace EmlaBot.Services
         /// </summary>
         /// <param name="sessionId">The session identifier.</param>
         /// <returns></returns>
-        public Task<IEnumerable<AggregatedAction>> GetFeed(string sessionId)
+        public async IAsyncEnumerable<AggregatedAction> GetFeed(string sessionId)
         {
-            throw new NotImplementedException();
+            var xml = await GetFeedXml(sessionId);
+
+            foreach( var item in xml.SelectNodes("/rss/channel/item").OfType<XmlElement>())
+            {
+                var title = item.SelectSingleNode("title")?.InnerText;
+                var pubDate = item.SelectSingleNode("pubDate")?.InnerText;
+                // might be easier to parse the guid for a timestamp?
+
+                yield return ParseRssTitle(title, pubDate);
+            }
         }
 
         /// <summary>
-        /// Gets the response from the API, and deserialise the response.
+        /// Parses the RSS title and publication date into an AggregatedAction object.
+        /// </summary>
+        /// <param name="title">The title of the RSS item.</param>
+        /// <param name="pubDate">The publication date of the RSS item.</param>
+        /// <returns>An AggregatedAction object containing the parsed data.</returns>
+        [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>")]
+        public AggregatedAction ParseRssTitle(string title, string pubDate)
+        {
+            if (string.IsNullOrEmpty(title))
+            {
+                throw new ArgumentNullException(nameof(title));
+            }
+
+            if (string.IsNullOrEmpty(pubDate) || !DateTime.TryParse(pubDate, out DateTime eventDate))
+            {
+                throw new FormatException(pubDate);
+            }
+
+            // TODO: need to work stuff out here ofr durations, when not hidden, as well as actiom
+
+            return new AggregatedAction
+            {
+                Time = eventDate.ToUnixTimestamp(),
+            };
+        }
+
+        /// <summary>
+        /// Gets the feed XML for the given session.
+        /// </summary>
+        /// <param name="sessionId">The session identifier.</param>
+        /// <returns>A task that represents the asynchronous operation. The task result contains the XML document.</returns>
+        public async Task<XmlDocument> GetFeedXml(string sessionId)
+        {
+            var _emlaClient = _httpClientFactory.CreateClient();
+            var httpResponse = await _emlaClient.GetAsync(new Uri(_config.BaseUrl, $"rssfeed?chastitysessionid={Uri.EscapeDataString(sessionId.Trim())}"));
+            if (httpResponse.IsSuccessStatusCode)
+            {
+                var doc = new XmlDocument();
+                doc.LoadXml(await httpResponse.Content.ReadAsStringAsync());
+                return doc;
+            }
+            else
+            {
+                if (httpResponse.StatusCode == (HttpStatusCode)429)
+                {
+                    throw new RateLimitedException(await httpResponse.Content.ReadAsStringAsync());
+                }
+                else if (httpResponse.StatusCode == HttpStatusCode.BadRequest)
+                {
+                    throw new InvalidApiKeyException(await httpResponse.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    // TOOD: This needs to be way better
+                    throw new HttpRequestException(await httpResponse.Content.ReadAsStringAsync());
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets the response from the API and deserializes the response.
         /// </summary>
         /// <param name="uri">The URI.</param>
-        /// <returns></returns>
+        /// <returns>A task that represents the asynchronous operation. The task result contains the InfoResponse object.</returns>
         /// <exception cref="System.NotImplementedException"></exception>
-        public static async Task<InfoResponse> GetResponse(Uri uri)
+        public async Task<InfoResponse> GetResponse(Uri uri)
         {
+            var _emlaClient = _httpClientFactory.CreateClient();
             var httpResponse = await _emlaClient.GetAsync(uri);
             if (httpResponse.IsSuccessStatusCode)
             {

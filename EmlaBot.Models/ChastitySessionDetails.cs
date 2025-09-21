@@ -195,6 +195,7 @@ namespace EmlaBot.Models
         [JsonPropertyName("enddate")]
         public string RawEndDate { get; set; }
 
+        [JsonIgnore]
         public int EndDate
         {
             get

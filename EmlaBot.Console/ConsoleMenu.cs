@@ -45,6 +45,12 @@ namespace EmlaBot.Console
                         duration = GetTimeSpan();
                         await _emlaLock.AddMaximumTime(wearer, duration);
                         break;
+
+                    case MenuOption.SubtractRequirements:
+                        var holder = GetApiToken();
+                        var count = GetCount();
+                        await _emlaLock.SubtractRequirementLinks(wearer, holder, count);
+                        break;
                 }
             }
             while (option != MenuOption.None);
@@ -67,6 +73,17 @@ namespace EmlaBot.Console
             System.Console.WriteLine(infoResponse.User.UserName);
         }
 
+        private static int GetCount()
+        {
+            System.Console.WriteLine("Please enter the count:");
+
+            var option = System.Console.ReadLine();
+
+            return int.TryParse(option, out int seconds)
+                ? seconds
+                : GetCount();
+        }
+
         private static TimeSpan GetTimeSpan()
         {
             System.Console.WriteLine("Please enter the duration (number of seconds until I get around to parsing time strings):");
@@ -85,6 +102,7 @@ namespace EmlaBot.Console
             System.Console.WriteLine($"{MenuOption.Info:D}: Get Info.");
             System.Console.WriteLine($"{MenuOption.Add:D}: Add time.");
             System.Console.WriteLine($"{MenuOption.AddMaximum:D}: Add max time.");
+            System.Console.WriteLine($"{MenuOption.SubtractRequirements:D}: Subtract requirements.");
             // Add more here as desired/required
 
             var option = System.Console.ReadLine();

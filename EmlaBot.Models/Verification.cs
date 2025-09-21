@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace EmlaBot.Models
 {
@@ -11,6 +12,7 @@ namespace EmlaBot.Models
         /// </summary>
         /// <value>The URI for the uploaded picture.</value>
         [DataMember(Name = "picture")]
+        [JsonPropertyName("picture")]
         public Uri Picture { get; set; }
 
         /// <summary>
@@ -18,6 +20,7 @@ namespace EmlaBot.Models
         /// </summary>
         /// <value>The verification code that should be present in the image.</value>
         [DataMember(Name = "code")]
+        [JsonPropertyName("code")]
         public string Code { get; set; }
 
         /// <summary>
@@ -25,6 +28,7 @@ namespace EmlaBot.Models
         /// </summary>
         /// <value>The time-stamp of when the image was uploaded.</value>
         [DataMember(Name = "timestamp")]
+        [JsonPropertyName("timestamp")]
         public int Timestamp { get; set; }
     }
 }

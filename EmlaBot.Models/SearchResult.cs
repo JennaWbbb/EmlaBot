@@ -4,14 +4,14 @@ using System.Text.Json.Serialization;
 namespace EmlaBot.Models
 {
     [DataContract]
-    public class Account
+    public class SearchResult
     {
         [DataMember(Name = "userid")]
         [JsonPropertyName("userid")]
         public string UserId { get; set; }
 
-        [DataMember(Name = "username")]
-        [JsonPropertyName("username")]
+        [DataMember(Name = "name")]
+        [JsonPropertyName("name")]
         public string UserName { get; set; }
     }
 }

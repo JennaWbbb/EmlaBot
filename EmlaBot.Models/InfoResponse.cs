@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace EmlaBot.Models
 {
@@ -10,6 +11,7 @@ namespace EmlaBot.Models
         /// </summary>
         /// <value>The user.</value>
         [DataMember(Name = "user")]
+        [JsonPropertyName("user")]
         public User User { get; set; }
 
         /// <summary>
@@ -17,6 +19,7 @@ namespace EmlaBot.Models
         /// </summary>
         /// <value>The chastity session.</value>
         [DataMember(Name = "chastitysession")]
+        [JsonPropertyName("chastitysession")]
         public ChastitySessionDetails ChastitySession { get; set; }
 
         /// <summary>
@@ -24,6 +27,7 @@ namespace EmlaBot.Models
         /// </summary>
         /// <value>The current verification detail.</value>
         [DataMember(Name = "verification")]
+        [JsonPropertyName("verification")]
         public Verification Verification { get; set; }
     }
 }

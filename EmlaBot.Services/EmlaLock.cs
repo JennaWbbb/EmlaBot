@@ -708,11 +708,9 @@ namespace EmlaBot.Services
             var httpResponse = await _emlaClient.GetAsync(uri);
             if (httpResponse.IsSuccessStatusCode)
             {
-                using (var str = await httpResponse.Content.ReadAsStreamAsync())
-                {
-                    var ser = new DataContractJsonSerializer(typeof(InfoResponse));
-                    return (InfoResponse)ser.ReadObject(str);
-                }
+                using var str = await httpResponse.Content.ReadAsStreamAsync();
+                var ser = new DataContractJsonSerializer(typeof(InfoResponse));
+                return (InfoResponse)ser.ReadObject(str);
             }
             else
             {

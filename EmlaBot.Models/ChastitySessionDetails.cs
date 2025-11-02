@@ -21,7 +21,7 @@ namespace EmlaBot.Models
 
         [DataMember(Name = "sessiontype")]
         [JsonPropertyName("sessiontype")]
-        public int SessionType { get; set; }
+        public PictureType SessionType { get; set; }
 
         [DataMember(Name = "interval")]
         [JsonPropertyName("interval")]
@@ -61,11 +61,11 @@ namespace EmlaBot.Models
 
         [DataMember(Name = "transfer")]
         [JsonPropertyName("transfer")]
-        public int Transfer { get; set; }
+        public Toggle Transfer { get; set; }
 
         [DataMember(Name = "holderfriendlink")]
         [JsonPropertyName("holderfriendlink")]
-        public int HolderFriendLink { get; set; }
+        public Toggle HolderFriendLink { get; set; }
 
         [DataMember(Name = "offeruserid")]
         [JsonPropertyName("offeruserid")]
@@ -277,7 +277,7 @@ namespace EmlaBot.Models
 
         [DataMember(Name = "pillory")]
         [JsonPropertyName("pillory")]
-        public int Pillory { get; set; }
+        public Toggle Pillory { get; set; }
 
         [DataMember(Name = "pilloryleft")]
         [JsonPropertyName("pilloryleft")]

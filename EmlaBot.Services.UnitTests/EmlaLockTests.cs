@@ -47,7 +47,7 @@ namespace EmlaBot.Services.UnitTests
             string pubDate = "Wed, 02 Oct 2002 08:00:00 EST";
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => _emlaLock.ParseRssTitle(title, pubDate));
+            Assert.Throws<ArgumentNullException>(() => _emlaLock.ParseRssTitle(title, pubDate));
         }
 
         [TestMethod]
@@ -58,7 +58,7 @@ namespace EmlaBot.Services.UnitTests
             string pubDate = "Invalid Date";
 
             // Act & Assert
-            Assert.ThrowsException<FormatException>(() => _emlaLock.ParseRssTitle(title, pubDate));
+            Assert.Throws<FormatException>(() => _emlaLock.ParseRssTitle(title, pubDate));
         }
     }
 }

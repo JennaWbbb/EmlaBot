@@ -618,6 +618,48 @@ namespace EmlaBot.Services
         }
 
         /// <summary>
+        /// Retrieves the action feed for a specified wearer, optionally filtered by a holder's credentials.
+        /// </summary>
+        /// <remarks>If the holder parameter is provided and its API key differs from the wearer's, the
+        /// feed is filtered using the holder's credentials. Otherwise, the feed is retrieved for the wearer
+        /// only.</remarks>
+        /// <param name="wearer">The API token representing the wearer whose action feed is to be retrieved. Cannot be null and must contain
+        /// valid user ID and API key.</param>
+        /// <param name="holder">The API token representing the holder whose credentials may be used to filter the feed. If null or if the
+        /// API key matches the wearer's, the feed is retrieved without holder filtering.</param>
+        /// <returns>A task that represents the asynchronous operation. The task result contains a collection of action items for
+        /// the specified wearer. The collection will be empty if no actions are available.</returns>
+        /// <exception cref="ArgumentNullException">Thrown if the wearer parameter is null.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown if the wearer parameter does not contain valid API credentials.</exception>
+        public async Task<IEnumerable<ActionItem>> GetFeed(IApiToken wearer, IApiToken holder)
+        {
+            if (wearer == null)
+            {
+                throw new ArgumentNullException(nameof(wearer));
+            }
+
+            if (string.IsNullOrWhiteSpace(wearer.UserId) || string.IsNullOrWhiteSpace(wearer.ApiKey))
+            {
+                throw new ArgumentOutOfRangeException(nameof(wearer), "Missing wearer API credentials");
+            }
+
+            IEnumerable<ActionItem> results;
+
+            if (holder == null || string.IsNullOrWhiteSpace(holder.ApiKey) || string.Equals(wearer.ApiKey, holder.ApiKey, StringComparison.OrdinalIgnoreCase))
+            {
+                //https://api.emlalock.com/sessionfeed?apikey=g7288qnyk7&userid=4wx7wa1ur1v6r03
+                results = await GetResponse<IEnumerable<ActionItem>>(new Uri(_config.BaseUrl, $"sessionfeed?userid={Uri.EscapeDataString(wearer.UserId.Trim())}&apikey={Uri.EscapeDataString(wearer.ApiKey.Trim())}"));
+            }
+            else
+            {
+                //https://api.emlalock.com/sessionfeed?userid=j2k62iogvm6y6pm&apikey=g7288qnyk7&holderid=4wx7wa1ur1v6r03
+                results = await GetResponse<IEnumerable<ActionItem>>(new Uri(_config.BaseUrl, $"sessionfeed?userid={Uri.EscapeDataString(wearer.UserId.Trim())}&apikey={Uri.EscapeDataString(holder.ApiKey.Trim())}&holderid={Uri.EscapeDataString(holder.UserId.Trim())}"));
+            }
+
+            return results.ToList();
+        }
+
+        /// <summary>
         /// Gets the activity feed for the given session.
         /// </summary>
         /// <param name="sessionId">The session identifier.</param>
@@ -699,18 +741,38 @@ namespace EmlaBot.Services
         /// <summary>
         /// Gets the response from the API and deserializes the response.
         /// </summary>
-        /// <param name="uri">The URI.</param>
+        /// <param name="uri">The URI of the resource to request. Cannot be null.</param>
         /// <returns>A task that represents the asynchronous operation. The task result contains the InfoResponse object.</returns>
-        /// <exception cref="System.NotImplementedException"></exception>
+        /// <exception cref="RateLimitedException">Thrown when the server responds with a status code indicating too many requests (HTTP 429).</exception>
+        /// <exception cref="InvalidApiKeyException">Thrown when the server responds with a status code indicating an invalid API key (HTTP 400).</exception>
+        /// <exception cref="HttpRequestException">Thrown when the HTTP request fails for reasons other than rate limiting or invalid API key.</exception>
         public async Task<InfoResponse> GetResponse(Uri uri)
+        {
+            return await GetResponse<InfoResponse>(uri);
+        }
+
+        /// <summary>
+        /// Sends an HTTP GET request to the specified URI and deserializes the JSON response into an object of type T.
+        /// </summary>
+        /// <remarks>The response content is expected to be in JSON format and compatible with the
+        /// specified type T. The method uses a new HTTP client instance for each request. Callers should ensure that
+        /// the provided URI is valid and accessible.</remarks>
+        /// <typeparam name="T">The type into which the JSON response is deserialized. Must be compatible with the response schema.</typeparam>
+        /// <param name="uri">The URI of the resource to request. Cannot be null.</param>
+        /// <returns>A task that represents the asynchronous operation. The task result contains the deserialized response object
+        /// of type T.</returns>
+        /// <exception cref="RateLimitedException">Thrown when the server responds with a status code indicating too many requests (HTTP 429).</exception>
+        /// <exception cref="InvalidApiKeyException">Thrown when the server responds with a status code indicating an invalid API key (HTTP 400).</exception>
+        /// <exception cref="HttpRequestException">Thrown when the HTTP request fails for reasons other than rate limiting or invalid API key.</exception>
+        public async Task<T> GetResponse<T>(Uri uri)
         {
             var _emlaClient = _httpClientFactory.CreateClient();
             var httpResponse = await _emlaClient.GetAsync(uri);
             if (httpResponse.IsSuccessStatusCode)
             {
                 using var str = await httpResponse.Content.ReadAsStreamAsync();
-                var ser = new DataContractJsonSerializer(typeof(InfoResponse));
-                return (InfoResponse)ser.ReadObject(str);
+                var ser = new DataContractJsonSerializer(typeof(T));
+                return (T)ser.ReadObject(str);
             }
             else
             {

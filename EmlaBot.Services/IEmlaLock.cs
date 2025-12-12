@@ -24,7 +24,7 @@ namespace EmlaBot.Services
         Task<InfoResponse> AddTime(IApiToken wearer, TimeSpan duration, string message);
 
         IAsyncEnumerable<AggregatedAction> GetFeed(string sessionId);
-
+        Task<IEnumerable<ActionItem>> GetFeed(IApiToken wearer, IApiToken holder);
         Task<InfoResponse> GetInfo(IApiToken user);
 
         Task<InfoResponse> SubtractMaximumTime(IApiToken wearer, IApiToken holder, TimeSpan duration);

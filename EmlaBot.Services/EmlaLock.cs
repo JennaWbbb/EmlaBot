@@ -618,6 +618,17 @@ namespace EmlaBot.Services
         }
 
         /// <summary>
+        /// Retrieves the current Locktober statistics.
+        /// </summary>
+        /// <returns>
+        /// The task result contains a <see cref="LocktoberStats"/> object with the latest Locktober statistics.
+        /// </returns>
+        public async Task<LocktoberStats> GetLocktoberStats()
+        {
+            return await GetResponse<LocktoberStats>(new Uri(_config.BaseUrl, "locktober"));
+        }
+
+        /// <summary>
         /// Retrieves the action feed for a specified wearer, optionally filtered by a holder's credentials.
         /// </summary>
         /// <remarks>If the holder parameter is provided and its API key differs from the wearer's, the

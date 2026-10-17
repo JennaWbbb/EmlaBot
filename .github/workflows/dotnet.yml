@@ -9,6 +9,10 @@ on:
   pull_request:
     branches: [ "main" ]
 
+permissions:
+  id-token: write
+  contents: read
+  
 jobs:
   build:
 
@@ -16,15 +20,34 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 8.0.x
+
     - name: Restore dependencies
       run: dotnet restore
+
     - name: Build
-      run: dotnet build --no-restore --configuration Release /p:Version=0.1.${{github.run_number}} -o out
+      run: dotnet build --no-restore --configuration Release /p:Version=0.1.${{github.run_number}} -o artifacts
 #    - name: Test
 #      run: dotnet test --no-build --verbosity normal
-    - name: Publish
-      run: dotnet nuget push ./out/*.nupkg --skip-duplicate --api-key ${{secrets.NUGETPUBLISHTOKEN}} -s https://api.nuget.org/v3/index.json
+#    - name: Publish
+#      run: dotnet nuget push ./out/*.nupkg --skip-duplicate --api-key ${{secrets.NUGETPUBLISHTOKEN}} -s https://api.nuget.org/v3/index.json
+
+    # Get a short-lived NuGet API key
+    - name: NuGet login (OIDC → temp API key)
+      uses: NuGet/login@v1
+      id: login
+      with:
+        user: ${{ secrets.NUGET_USER }} # Recommended: use a secret like ${{ secrets.NUGET_USER }} for your nuget.org username (profile name), NOT your email address
+    
+    # Push the EmlaBot.Models package
+    - name: NuGet push
+      run: dotnet nuget push artifacts/EmlaBot.Models.0.1.${{github.run_number}}.nupkg --api-key ${{steps.login.outputs.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json
+    
+    # Push the EmlaBot.Services package
+    - name: NuGet push
+      run: dotnet nuget push artifacts/EmlaBot.Services.0.1.${{github.run_number}}.nupkg --api-key ${{steps.login.outputs.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json
+      

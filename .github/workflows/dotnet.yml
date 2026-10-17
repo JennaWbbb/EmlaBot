@@ -30,7 +30,7 @@ jobs:
       run: dotnet restore
 
     - name: Build
-      run: dotnet build --no-restore --configuration Release /p:Version=0.1.${{github.run_number}} -o out
+      run: dotnet build --no-restore --configuration Release /p:Version=0.1.${{github.run_number}} -o artifacts
 #    - name: Test
 #      run: dotnet test --no-build --verbosity normal
 #    - name: Publish
